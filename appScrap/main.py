@@ -9,6 +9,8 @@ def main():
     layout = [[sg.Text('App Scraping', font='Arial')],
              [sg.Text('Digite a URL:'), sg.Input(key='-URL-', size=(45, 1), default_text='www.example.com'),
                sg.Button('Run', bind_return_key=True)],
+              [sg.Text('Buscar Palavra:'), sg.Input(key='-KEYWORD-', size=(20, 0.5), default_text=''),
+              sg.Button('Filter', bind_return_key=True)], 
              [sg.Frame('Output', font='Arial', layout=[
              [sg.Output(size=(65, 15), font='Courier 10', key='-OUTPUT-')]])],
             ]
