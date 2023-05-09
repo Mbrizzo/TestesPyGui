@@ -2,6 +2,8 @@ import PySimpleGUI as sg # Interface Gráfica
 import requests
 from bs4 import BeautifulSoup
 
+from functions import get_website_text
+
 
 def main():
     sg.theme('Reddit') # https://www.geeksforgeeks.org/themes-in-pysimplegui/
@@ -17,20 +19,19 @@ def main():
 
     window = sg.Window('App Scraping', layout) # cria a janela
 
-    while True: # loop para manter a janela aberta
+    while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED:
             break
         if event == 'Run':
-            url = values['-URL-']        
+            url = values['-URL-']
             print(f'Scraping website at {url}')
-            res = requests.get(url)
-            soup = BeautifulSoup(res.text, 'html.parser')
-            texto_extraido = soup.get_text()
 
-            # Atualiza a janela com o resultado do scraping
-            window['-OUTPUT-'].update(texto_extraido)
+            # Get URL
+            texto_extraido = get_website_text(url)
+            print(texto_extraido)
 
-    window.close() # fechar a janela quando o loop terminar
+    window.close()
+
 if __name__ == '__main__':
     main()
